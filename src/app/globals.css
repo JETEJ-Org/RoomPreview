@@ -1,6 +1,12 @@
 body{
     border-radius: 10px;
     background: #FFF;
+    text-align: center;
+    /*display: flex;
+    flex-direction: column;*/
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
 }
 
 h1{
@@ -8,7 +14,6 @@ h1{
     font-family: "Noto Sans";
     font-size: 50px;
     font-style: normal;
-    text-align: center;
     font-weight: 700;
     line-height: normal;
 }
