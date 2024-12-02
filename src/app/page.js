@@ -1,17 +1,26 @@
 
 export default function Home() {
   return (
-    <div >
+    <div className="bodycontainer">      
       <main>
-        <h1>Room Preview</h1>
-<<<<<<< HEAD
-        <p>A room preview app :0</p>
-        <input type="text" placeholder="Search Room" className="search"></input>
-        <button className="reserve">New reserve</button>        
-=======
-        <p>A room preview app</p>
->>>>>>> 0eac89f21ebb7df0b3d6e0a0e0d6006d3c245f4d
+        <div className="corpo">
+          <div className="top">            
+            <h1>Reservas</h1>
+            <button className="reserve">New reserve</button>
+          </div>
+          <input type="text" placeholder="Search Room" className="search"></input>          
+        </div>
+        <div className="roomcontainer">
+          <div className="room">
+            <p>Sala</p>
+            <p>Pessoa</p>
+            <p>Data</p>
+            <p>Horário</p>            
+            <button className="moreinfo">...</button>
+          </div>
+        </div>
       </main>
-    </div>
+    </div>    
   );
 }
+
