@@ -6,7 +6,7 @@ export default function Home() {
         <div className="corpo">
           <div className="top">            
             <h1>Reservas</h1>
-            <button className="reserve">New reserve</button>
+            <button className="reserve">+</button>
           </div>
           <input type="text" placeholder="Search Room" className="search"></input>          
         </div>
@@ -16,7 +16,7 @@ export default function Home() {
             <p>Pessoa</p>
             <p>Data</p>
             <p>Horário</p>            
-            <button className="moreinfo">...</button>
+            <button className="moreinfo"><img src="src/app/assets/sidebar_images/more.png" alt="More Info"/></button>
           </div>
         </div>
       </main>
