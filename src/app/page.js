@@ -9,7 +9,7 @@ export default function Home() {
             <button className="reserve">+</button>
           </div>
           <div className="inputcontainer">
-            <img src="src/app/assets/header_images/search.png" alt="Search Icon"></img>
+            <img src="assets/header_images/search.png" alt="Search Icon"></img>
             <input type="text" placeholder="Search Room" className="search"></input>          
           </div>
         </div>
