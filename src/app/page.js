@@ -19,7 +19,7 @@ export default function Home() {
             <p className="info2">Pessoa</p>
             <p className="info3">Data</p>
             <p className="info4">Horário</p>            
-            <button className="moreinfo"><img src="assets/sidebar_images/more.png" alt="More Info"/></button>
+            <button className="moreinfo"><img src="./assets/sidebar_images/more.png" alt="More Info"/></button>
           </div>
         </div>
         {/*<div className="pages_count"> 
