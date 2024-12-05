@@ -9,7 +9,7 @@ export default function Home() {
             <button className="reserve">+</button>
           </div>
           <div className="inputcontainer">
-            <img src="assets/header_images/search.png" alt="Search Icon"></img>
+            <img src="./assets/header_images/search.png" alt="Search Icon"></img>
             <input type="text" placeholder="Search Room" className="search"></input>          
           </div>
         </div>
@@ -19,10 +19,10 @@ export default function Home() {
             <p className="info2">Pessoa</p>
             <p className="info3">Data</p>
             <p className="info4">Horário</p>            
-            <button className="moreinfo"><img src="src/app/assets/sidebar_images/more.png" alt="More Info"/></button>
+            <button className="moreinfo"><img src="assets/sidebar_images/more.png" alt="More Info"/></button>
           </div>
         </div>
-        {/*<div className="pages_count">
+        {/*<div className="pages_count"> 
           <div className="count">
             <p className="atual">1</p>
             <p>-</p>
