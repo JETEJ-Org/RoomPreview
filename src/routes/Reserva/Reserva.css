@@ -1,4 +1,3 @@
-
 body {
     border-radius: 10px;
     background: #FFF;
@@ -27,71 +26,71 @@ main {
     justify-content: top;
 }
 
-.topcontainer {
-    /*position: fixed;*/
+/*.topcontainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 5%;
-}
+}*/
 
 .top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
+    justify-content: space-between; 
+    padding-top: 100px;
 }
 
 h1 {
-    margin: 0;
-    font-size: 50px;
-    text-align: center;
-    color: #123033;
-    font-family: "Noto Sans";
-    font-style: normal;
+    margin-right: 500px;
+    color: #0A1629;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 36px;
     font-weight: 700;
-    line-height: normal;
 }
 
-.reserve {
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
+.newreserve_button {
+    width: 100px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 25px;
     cursor: pointer;
     border: none;
     background-color: #127F87;
-    color: white;
-    margin-left: 60%;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 14px;
+    box-shadow: 0px 6px 12px 0px rgba(63, 140, 255, 0.26);
+    color: #FFF;
     transition: background-color 0.3s ease;
 }
 
-.reserve:hover {
+.newreserve_button:hover {
     background-color: #0e5c61;
 }
 
 .input-container {
-    position: relative;
-    flex-shrink: 0;        
+    position: center;
+    padding-left: 450px;
+    padding-bottom: 1%;
     width: 100%;
 }
 
-.input-container img {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    pointer-events: none;
-}
+.search_icon{    
+    width: 25px;
+    .icon{
+        position: absolute;
+        left: 460px;
+        transform: translateY(3px);
+        pointer-events: icon;
+        background-color:unset;
+    }
+} 
 
 .search {
-    width: 100%;
+    width: 25%;
     height: 40px;
     padding-left: 40px;
     border: 1px solid #ccc;
@@ -129,10 +128,12 @@ h1 {
     height: 50px;
     border-radius: 16px;
     background: #F4F9FD;
+    
 }
 
 .moreinfo:hover {
     background: #d5d8db;
+    transition: background-color 0.3s ease;
 }
 
 /* Contador de Páginas de Reserva

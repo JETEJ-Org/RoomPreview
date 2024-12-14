@@ -1,0 +1,99 @@
+.container_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-left: 330px;
+  padding: 10px 0;
+  gap: 20px;
+  z-index: 1000;
+}
+
+.group_search {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: var(--Gray-50, #F2F2F2);
+  padding: 8px;
+  border-radius: 24px;
+  gap: 16px;
+  width: 800px;
+  margin-top: 20px;
+}
+
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #DBDBDB;
+  color: black;
+  border-radius: 100%;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.icon_search {
+  cursor: pointer;
+}
+
+.input_search {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+}
+
+.input_search:focus {
+  outline: none;
+}
+
+.group_menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  gap: 17px;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.group_profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  gap: 20px;
+  border-radius: 27px;
+  background: var(--Gray-50, #F2F2F2);
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.profile_photo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+.profile_name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Noto Sans";
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+}
+
+.profile_settings {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
