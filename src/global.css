@@ -1,10 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100dvw;
+    height: 100dvh;
+}
+
 :root {
     /* Background */
     --white-background: #FFFFFF;
     --green-background: #127F87;
-    --green-degrade: url(./assets/login/background.png);
 
     /* Fontes */
     --font: "Noto Sans", sans-serif;
@@ -42,8 +55,8 @@
     justify-content: center;
     margin: 0;
     padding: 0;
-    width: 100dvw;
-    height: 100dvh;
+    width: 100%;
+    height: 100%;
     font-family: var(--font);
     font-weight: var(--font-regular);
     overflow: hidden;

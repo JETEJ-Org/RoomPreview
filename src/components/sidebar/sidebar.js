@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 
 // Styles
 import './sidebar.css';
@@ -15,14 +16,14 @@ import Funcionarios from '../../assets/sidebar_images/faUserLarge.png';
 import Logout from '../../assets/sidebar_images/faArrowRightFromBracket.png';
 
 const Sidebar = () => {
-  const [isClosed, setIsClosed] = useState(false);
+  const [isClosed, setIsClosed] = useState(true);
 
   const toggleSidebar = () => {
     setIsClosed(!isClosed);
   };
 
   return (
-    <div>
+    <>
       <div className={`sidebar ${isClosed ? 'closed' : ''}`}>
         <div className="logo">
           <img src={Logo} alt="Logo" />
@@ -30,9 +31,9 @@ const Sidebar = () => {
         <nav className="menu">
           <ul>
             <li><img src={Home} className="icon" alt="Home" /><a href="#inicio">Início</a></li>
-            <li><img src={Reservas} className="icon" alt="Reservas" /><a href="#reservas">Reservas</a></li>
+            <li><img src={Reservas} className="icon" alt="Reservas" /><Link to="/reserva">Reservas</Link></li>
             <li><img src={Calendar} className="icon" alt="Calendário" /><a href="#calendario">Calendário</a></li>
-            <li><img src={Salas} className="icon" alt="Salas" /><a href="#salas">Salas</a></li>
+            <li><img src={Salas} className="icon" alt="Salas" /><Link to="/salas">Salas</Link></li>
             <li><img src={Notas} className="icon" alt="Notas" /><a href="#notas">Notas</a></li>
             <li><img src={Relatorios} className="icon" alt="Relatórios" /><a href="#relatorios">Relatórios</a></li>
             <li><img src={Funcionarios} className="icon" alt="Funcionários" /><a href="#funcionarios">Funcionários</a></li>
@@ -43,9 +44,9 @@ const Sidebar = () => {
             <li><img src={Logout} className="icon" alt="Sair" /><a href="#sair">Sair</a></li>
           </ul>
         </div>
+        <button className="toggle-btn" onClick={toggleSidebar}>☰</button>
       </div>
-      <button className="toggle-btn" onClick={toggleSidebar}>☰</button>
-    </div>
+    </>
   );
 };
 

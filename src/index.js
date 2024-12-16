@@ -7,6 +7,7 @@ import "./global.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/Home/Home";
 import Reserva from "./routes/Reserva/Reserva";
+import Salas from "./routes/Salas/Salas";
 
 // Config Routes
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/reserva",
     element: <Reserva />,
+  },
+  {
+    path: "/salas",
+    element: <Salas />,
   }
 ]);
 

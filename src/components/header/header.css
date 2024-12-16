@@ -1,46 +1,45 @@
 .container_header {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  position: fixed;
+  justify-content: space-between;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
-  margin-left: 330px;
-  padding: 10px 0;
-  gap: 20px;
-  z-index: 1000;
+  height: 10%;
+  margin: 0;
+  padding: 0 30px;
+  gap: 15px;
+  z-index: 1;
 }
 
 .group_search {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   background: var(--Gray-50, #F2F2F2);
   padding: 8px;
   border-radius: 24px;
-  gap: 16px;
-  width: 800px;
-  margin-top: 20px;
+  width: 90%;
 }
-
 
 .icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
   background-color: #DBDBDB;
   color: black;
   border-radius: 100%;
   cursor: pointer;
-  padding: 6px;
+  padding: 10px;
+  margin: 0;
 }
 
 .icon_search {
   cursor: pointer;
+  margin-right: 15px;
 }
 
 .input_search {
@@ -53,33 +52,23 @@
   outline: none;
 }
 
-.group_menu {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px;
-  gap: 17px;
-  margin-top: 20px;
-  margin-left: 30px;
-}
-
 .group_profile {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 8px;
+  justify-content: space-between;
   gap: 20px;
   border-radius: 27px;
+  padding: 6px 12px;
+  margin: 0;
   background: var(--Gray-50, #F2F2F2);
-  margin-left: 30px;
-  margin-top: 20px;
 }
 
 .profile_photo img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  margin-left: 5px;
+  margin: 0;
+  padding: 0;
 }
 
 .profile_name {

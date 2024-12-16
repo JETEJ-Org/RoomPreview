@@ -1,36 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Urbanist:wght@400&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .sidebar {
-  left: 0;
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 300px;
-  height: 95vh;
-  background-color: var(--semantics-three);
-  padding: 20px;
-  margin-left: 10px;
-  border-radius: 13.638px;
-  filter: drop-shadow(5px 5px 10px rgba(3, 79, 117, 0.2));
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  left: 0;
+  position: absolute;
+  z-index: 2;
+  width: 300px;
+  height: 95vh;
+  padding: 20px;
+  margin-left: 10px;
+  filter: drop-shadow(5px 5px 10px rgba(3, 79, 117, 0.2));
+  color: var(--secondary-one);
+  background-color: var(--semantics-three);
+  transition: ease-in-out 0.3s;
   font-family: "Noto Sans", sans-serif;
   font-size: 15.042px;
   font-style: normal;
   font-weight: 400;
-  color: var(--secondary-one);
-  transition: transform 0.3s ease;
+  border-radius: 13.638px;
 }
 
-.sidebar.closed {
-  transform: translate(-100%, -50%);
+.closed {
+  left: -300px;
+  transition: ease-in-out 0.3s;
 }
 
 .logo {
@@ -38,7 +32,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
 }
 
 .icon {
@@ -50,7 +43,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 .menu li {
@@ -69,15 +62,18 @@
   transform: scale(1.05);
 }
 
-.menu a {
+.menu a,
+.menu ul li Link {
   text-decoration: none;
   color: inherit;
   display: flex;
   align-items: center;
   width: 100%;
+  margin-left: 10px;
 }
 
 .logout {
+  margin-top: auto;
   padding-top: 20px;
   border-top: 2px solid var(--secondary-one);
 }
@@ -105,10 +101,12 @@
   display: flex;
   align-items: center;
   width: 100%;
+  margin-left: 10px;
 }
 
 .toggle-btn {
-  position: absolute;
+  position: fixed;
+  z-index: 3;
   left: 320px;
   top: 50%;
   transform: translateY(-50%);
@@ -123,10 +121,19 @@
   transition: background 0.3s ease;
 }
 
-.sidebar.closed+.toggle-btn {
-  left: 20px;
-}
-
 .toggle-btn:hover {
   background: var(--semantics-two);
+}
+
+@media screen and (min-width: 1440px) {
+  .sidebar {
+    position: relative;
+  }
+
+  .closed {
+    position: absolute;
+  }
+
+
+
 }

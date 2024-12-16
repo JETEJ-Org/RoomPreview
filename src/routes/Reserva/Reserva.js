@@ -1,4 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
+import { format } from 'date-fns';
 import "./Reserva.css";
 
 // Componentes
@@ -15,64 +17,175 @@ import Filter from "../../assets/header_images/filter.png";
 const Reserva = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [isPopupVisible2, setPopupVisible2] = useState(false);
-  const [isInputVisible, setInputVisible] = useState(false); // Estado para controlar a visibilidade do input
+  const [isInputVisible, setInputVisible] = useState(false);
+
+  const [reservas, setReservas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(false);
+
+  const [selectedReserva, setSelectedReserva] = useState(null);
+  const [filteredReservas, setFilteredReservas] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);
+    setMessage(false);
   };
 
   const togglePopup2 = () => {
     setPopupVisible2(!isPopupVisible2);
+    setMessage(false);
   };
 
   const toggleInputVisibility = () => {
     setInputVisible(!isInputVisible);
+    setMessage(false);
   };
 
+  const handleReservaClick = (reserva) => {
+    setSelectedReserva(reserva); // Define a reserva selecionada
+    togglePopup2(); // Abre o pop-up de detalhes
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  useEffect(() => {
+    fetchReservas();
+  }, []);
+
+  useEffect(() => {
+    const filterReservas = () => {
+      if (searchTerm === '') {
+        setFilteredReservas(reservas); // Se não houver filtro, exibe todas as reservas
+      } else {
+        const filtered = reservas.filter(reserva =>
+          reserva.sala_id.toLowerCase().includes(searchTerm.toLowerCase()) // Filtra por sala
+        );
+        setFilteredReservas(filtered); // Atualiza as reservas filtradas
+      }
+    };
+
+    filterReservas(); // Executa o filtro sempre que as reservas ou o termo de busca mudarem
+  }, [searchTerm, reservas]);
+
+
+  const fetchReservas = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/reservas');
+      if (response.data.length === 0) {
+        setError('Nenhuma reserva encontrada.');
+        setMessage(true);
+      }
+      setReservas(response.data);
+      setFilteredReservas(response.data);
+    } catch (err) {
+      console.error(err);
+      setError(err.message || 'Erro ao carregar reservas.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCreate = (newReserva) => {
+    setReservas((prev) => [...prev, newReserva]);
+    setMessage(false);
+  };
+
+  const deleteReserva = async (id) => {
+    try {
+      await axios.delete(`http://localhost:4000/reservas/${id}`);
+      setReservas(reservas.filter((reserva) => reserva._id !== id));
+    } catch (err) {
+      console.error(err);
+      setError(err.message || 'Erro ao deletar reserva.');
+      alert("Erro ao deletar reserva. Tente novamente.");
+    }
+  }
+
   return (
-    <div className="bodycontainer">
-      <main>
-        <div>
-          <Sidebar />
-        </div>
-        <div>
+    <>
+      <>
+        <Sidebar />
+      </>
+      <div className="bodycontainer">
+        <>
           <Header />
-        </div>
-
-        <div className="top">
-          <h1>Reservas</h1>
-          <button className="filter_button" onClick={toggleInputVisibility}>
-            <img src={Filter} alt="Filter" />
-          </button>
-          <button className="newreserve_button" onClick={togglePopup}>
-            + Reserva
-          </button>
-          <Reservar isVisible={isPopupVisible} onClose={togglePopup} />
-        </div>
-
-        {isInputVisible && (
-          <div className="input-container">
-            <div className="search_icon">
-              <img src={Search} className="icon" alt="Search Icon" />
+        </>
+        <div className="reservas-container">
+          <div className="top">
+            <div className="title">
+              <h1>Reservas</h1>
             </div>
-            <input id="filter" type="text" placeholder="Search Room" className="search" />
+            <div className="buttons-container">
+              {isInputVisible && (
+                <div className="reserva-search-container">
+                  <div className="search_icon">
+                    <img src={Search} className="icon" alt="Search Icon" />
+                  </div>
+                  <input id="filter" type="text" placeholder="Buscar por Sala" className="search" value={searchTerm} onChange={handleSearchChange} />
+                </div>
+              )}
+              <button className="filter_button" onClick={toggleInputVisibility}>
+                <img src={Filter} alt="Filter" />
+              </button>
+              <button className="newreserve_button" onClick={togglePopup}>
+                + Reserva
+              </button>
+            </div>
+            <Reservar isVisible={isPopupVisible} onClose={togglePopup} onCreate={handleCreate} />
           </div>
-        )}
 
-        <div className="roomcontainer" id="roomcontainer">
-          <div className="room">
-            <p id="info1">Sala</p>
-            <p id="info2">Pessoa</p>
-            <p id="info3">Data</p>
-            <p id="info4">Horário</p>
-            <button className="moreinfo" onClick={togglePopup2}>
-              <img src={More} alt="More Info" />
-            </button>
-            <Detalhar isVisible={isPopupVisible2} onClose={togglePopup2} />
+          <div className="reservas">
+            {message ? (
+              <div className="loading">
+                <p>{error}</p>
+              </div>
+            ) : false}
+
+            {loading ? (
+              <div className="loading">
+                <p>Carregando reservas...</p>
+              </div>
+            ) :
+              filteredReservas.map((reserva) => (
+                <div className="reserva" key={reserva._id}>
+                  <div className="reserva-infos">
+                    <div className="infos">
+                      <p>Sala</p>
+                      <p>{reserva.sala_id}</p>
+                    </div>
+                    <div className="infos">
+                      <p>Pessoa</p>
+                      <p>{reserva.pessoa}</p>
+                    </div>
+                    <div className="infos">
+                      <p>Data</p>
+                      <p>{format(new Date(reserva.data), 'dd/MM/yyyy')}</p>
+                    </div>
+                    <div className="infos">
+                      <p>Horário</p>
+                      <p>{reserva.horario_inicio}</p>
+                    </div>
+                    <Detalhar isVisible={isPopupVisible2} onClose={togglePopup2} />
+                  </div>
+                  <div className="reserva-buttons">
+                    <button className="moreinfo" onClick={() => handleReservaClick(reserva)}>
+                      <img src={More} alt="More Info" />
+                    </button>
+                    <button className="moreinfo" onClick={() => deleteReserva(reserva._id)} style={{ cursor: 'pointer', color: 'red', fontSize: '1.3rem', fontWeight: 'bold' }}>
+                      X
+                    </button>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+      <Detalhar isVisible={isPopupVisible2} onClose={togglePopup2} reserva={selectedReserva} />
+    </>
   );
 };
 
