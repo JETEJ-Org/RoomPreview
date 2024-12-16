@@ -23,6 +23,8 @@ const Sala = () => {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(false);
 
+  const api = "https://keyroomapi-git-master-johnvitordevs-projects.vercel.app";
+
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);
   };
@@ -39,7 +41,7 @@ const Sala = () => {
   useEffect(() => {
     const fetchSalas = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/salas');
+        const response = await axios.get(`${api}/salas`);
         if (response.data.length === 0) {
           setError('Nenhuma sala encontrada.');
           setMessage(true);
@@ -58,7 +60,7 @@ const Sala = () => {
 
   const deleteSala = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/salas/${id}`);
+      await axios.delete(`${api}/salas/${id}`);
       setSalas(salas.filter((sala) => sala._id !== id));
     } catch (err) {
       console.error(err);

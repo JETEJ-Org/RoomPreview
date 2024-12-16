@@ -15,6 +15,8 @@ import Search from "../../assets/header_images/search.png";
 import Filter from "../../assets/header_images/filter.png";
 
 const Reserva = () => {
+  const api = "https://keyroomapi-git-master-johnvitordevs-projects.vercel.app";
+
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [isPopupVisible2, setPopupVisible2] = useState(false);
   const [isInputVisible, setInputVisible] = useState(false);
@@ -74,7 +76,7 @@ const Reserva = () => {
 
   const fetchReservas = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/reservas');
+      const response = await axios.get(`${api}/reservas`);
       if (response.data.length === 0) {
         setError('Nenhuma reserva encontrada.');
         setMessage(true);
@@ -96,7 +98,7 @@ const Reserva = () => {
 
   const deleteReserva = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/reservas/${id}`);
+      await axios.delete(`${api}/reservas/${id}`);
       setReservas(reservas.filter((reserva) => reserva._id !== id));
     } catch (err) {
       console.error(err);
@@ -148,6 +150,10 @@ const Reserva = () => {
             {loading ? (
               <div className="loading">
                 <p>Carregando reservas...</p>
+              </div>
+            ) : error ? (
+              <div className="loading">
+                <p>{error}</p>
               </div>
             ) :
               filteredReservas.map((reserva) => (
