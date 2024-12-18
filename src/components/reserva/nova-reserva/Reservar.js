@@ -41,8 +41,11 @@ const Reservar = ({ isVisible, onClose, onCreate }) => {
       onClose(); // Fecha o popup
       alert("Reserva criada com sucesso!");
     } catch (error) {
-      console.error(error);
-      alert("Erro ao criar reserva. Verifique os dados e tente novamente.");
+      const errorMessage =
+        error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : "Erro ao criar reserva. Verifique os dados e tente novamente.";
+      alert(errorMessage);
     }
   };
 

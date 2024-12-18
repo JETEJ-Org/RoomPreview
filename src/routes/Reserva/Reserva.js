@@ -15,7 +15,7 @@ import Search from "../../assets/header_images/search.png";
 import Filter from "../../assets/header_images/filter.png";
 
 const Reserva = () => {
-  const api = "https://keyroomapi-git-master-johnvitordevs-projects.vercel.app";
+  const api = "http://localhost:4000";
 
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [isPopupVisible2, setPopupVisible2] = useState(false);
@@ -24,7 +24,6 @@ const Reserva = () => {
   const [reservas, setReservas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [message, setMessage] = useState(false);
 
   const [selectedReserva, setSelectedReserva] = useState(null);
   const [filteredReservas, setFilteredReservas] = useState([]);
@@ -32,17 +31,14 @@ const Reserva = () => {
 
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);
-    setMessage(false);
   };
 
   const togglePopup2 = () => {
     setPopupVisible2(!isPopupVisible2);
-    setMessage(false);
   };
 
   const toggleInputVisibility = () => {
     setInputVisible(!isInputVisible);
-    setMessage(false);
   };
 
   const handleReservaClick = (reserva) => {
@@ -79,7 +75,6 @@ const Reserva = () => {
       const response = await axios.get(`${api}/reservas`);
       if (response.data.length === 0) {
         setError('Nenhuma reserva encontrada.');
-        setMessage(true);
       }
       setReservas(response.data);
       setFilteredReservas(response.data);
@@ -93,7 +88,6 @@ const Reserva = () => {
 
   const handleCreate = (newReserva) => {
     setReservas((prev) => [...prev, newReserva]);
-    setMessage(false);
   };
 
   const deleteReserva = async (id) => {
@@ -141,52 +135,59 @@ const Reserva = () => {
           </div>
 
           <div className="reservas">
-            {message ? (
-              <div className="loading">
-                <p>{error}</p>
-              </div>
-            ) : false}
-
-            {loading ? (
+            {loading && (
               <div className="loading">
                 <p>Carregando reservas...</p>
               </div>
-            ) : error ? (
+            )}
+
+            {!loading && error && (
               <div className="loading">
                 <p>{error}</p>
               </div>
-            ) :
-              filteredReservas.map((reserva) => (
-                <div className="reserva" key={reserva._id}>
-                  <div className="reserva-infos">
-                    <div className="infos">
-                      <p>Sala</p>
-                      <p>{reserva.sala_id}</p>
-                    </div>
-                    <div className="infos">
-                      <p>Pessoa</p>
-                      <p>{reserva.pessoa}</p>
-                    </div>
-                    <div className="infos">
-                      <p>Data</p>
-                      <p>{format(new Date(reserva.data), 'dd/MM/yyyy')}</p>
-                    </div>
-                    <div className="infos">
-                      <p>Horário</p>
-                      <p>{reserva.horario_inicio}</p>
-                    </div>
-                    <Detalhar isVisible={isPopupVisible2} onClose={togglePopup2} />
+            )}
+
+            {!loading && !error && filteredReservas.length === 0 && (
+              <div className="loading">
+                <p>Nenhuma reserva encontrada.</p>
+              </div>
+            )}
+
+            {!loading && !error && filteredReservas.map((reserva) => (
+              <div className="reserva" key={reserva._id}>
+                <div className="reserva-infos">
+                  <div className="infos">
+                    <p>Sala</p>
+                    <p>{reserva.sala_id}</p>
                   </div>
-                  <div className="reserva-buttons">
-                    <button className="moreinfo" onClick={() => handleReservaClick(reserva)}>
-                      <img src={More} alt="More Info" />
-                    </button>
-                    <button className="moreinfo" onClick={() => deleteReserva(reserva._id)} style={{ cursor: 'pointer', color: 'red', fontSize: '1.3rem', fontWeight: 'bold' }}>
-                      X
-                    </button>
+                  <div className="infos">
+                    <p>Pessoa</p>
+                    <p>{reserva.pessoa}</p>
                   </div>
+                  <div className="infos">
+                    <p>Data</p>
+                    <p>{format(new Date(reserva.data), 'dd/MM/yyyy')}</p>
+                  </div>
+                  <div className="infos">
+                    <p>Horário</p>
+                    <p>{reserva.horario_inicio}</p>
+                  </div>
+                  <Detalhar isVisible={isPopupVisible2} onClose={togglePopup2} />
                 </div>
-              ))}
+                <div className="reserva-buttons">
+                  <button className="moreinfo" onClick={() => handleReservaClick(reserva)}>
+                    <img src={More} alt="More Info" />
+                  </button>
+                  <button
+                    className="moreinfo"
+                    onClick={() => deleteReserva(reserva._id)}
+                    style={{ cursor: 'pointer', color: 'red', fontSize: '1.3rem', fontWeight: 'bold' }}
+                  >
+                    X
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

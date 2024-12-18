@@ -23,7 +23,7 @@ const Sala = () => {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(false);
 
-  const api = "https://keyroomapi-git-master-johnvitordevs-projects.vercel.app";
+  const api = "http://localhost:4000";
 
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);
@@ -96,9 +96,6 @@ const Sala = () => {
               )}
               <button className="filter_button" onClick={toggleInputVisibility}>
                 <img src={Filter} alt="Filter" />
-              </button>
-              <button className="newreserve_button" onClick={togglePopup}>
-                + Sala
               </button>
             </div>
             <Reservar isVisible={isPopupVisible} onClose={togglePopup} />
