@@ -166,7 +166,7 @@ const Reserva = () => {
                   </div>
                   <div className="infos">
                     <p>Data</p>
-                    <p>{format(new Date(reserva.data), 'dd/MM/yyyy')}</p>
+                    <p>{new Date(reserva.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</p>
                   </div>
                   <div className="infos">
                     <p>Horário</p>
