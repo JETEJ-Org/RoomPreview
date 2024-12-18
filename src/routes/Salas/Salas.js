@@ -23,7 +23,7 @@ const Sala = () => {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(false);
 
-  const api = "http://localhost:4000";
+  const api = "https://keyroomapi-git-master-johnvitordevs-projects.vercel.app";
 
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);

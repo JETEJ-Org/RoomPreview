@@ -15,7 +15,7 @@ import Search from "../../assets/header_images/search.png";
 import Filter from "../../assets/header_images/filter.png";
 
 const Reserva = () => {
-  const api = "http://localhost:4000";
+  const api = "https://keyroomapi-git-master-johnvitordevs-projects.vercel.app";
 
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [isPopupVisible2, setPopupVisible2] = useState(false);
